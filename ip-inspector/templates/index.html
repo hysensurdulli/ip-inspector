@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>IP Inspector | Educational Demo</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; padding: 24px;
+      display: grid; place-items: center;
+      color: #edf4ff; font-family: Inter, Arial, sans-serif;
+      background: radial-gradient(circle at top, #1c3152 0, #0a1020 48%, #070b14 100%);
+    }
+    main {
+      width: min(100%, 720px); padding: clamp(22px, 5vw, 42px);
+      border: 1px solid #293b58; border-radius: 24px;
+      background: rgba(17, 28, 48, .96);
+      box-shadow: 0 24px 80px #0008;
+    }
+    .eyebrow { color: #75aaff; letter-spacing: .16em; font-size: 12px; font-weight: 800; }
+    h1 { margin: 12px 0; font-size: clamp(30px, 7vw, 46px); }
+    .intro { color: #aebdd2; line-height: 1.65; }
+    .notice {
+      margin: 22px 0; padding: 14px 16px; border-radius: 12px;
+      color: #d8e8ff; background: #172b47; border: 1px solid #294b72;
+      font-size: 14px; line-height: 1.55;
+    }
+    .ip-card {
+      margin: 22px 0; padding: 22px; border-radius: 16px;
+      text-align: center; background: #0d192b; border: 1px solid #263b59;
+    }
+    .label { color: #8fa5c2; font-size: 11px; letter-spacing: .13em; font-weight: 700; }
+    .ip { margin-top: 12px; color: #67e8a5; font-size: clamp(21px, 5vw, 32px); font-weight: 800; overflow-wrap: anywhere; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .item { padding: 18px; border-radius: 14px; background: #1a2940; border: 1px solid #293d5b; min-width: 0; }
+    .item p { margin: 9px 0 0; font-weight: 700; overflow-wrap: anywhere; }
+    footer { margin-top: 25px; color: #778ba7; text-align: center; font-size: 12px; line-height: 1.6; }
+    @media (max-width: 480px) { body { padding: 14px; } .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">EDUCATIONAL CYBERSECURITY DEMO</div>
+  <h1>IP Inspector</h1>
+  <p class="intro">Një demonstrim i mënyrës se si një server sheh adresën IP publike të lidhjes që hap këtë faqe.</p>
+
+  <div class="notice">
+    <strong>Njoftim privatësie:</strong> Kur hap këtë faqe, serveri lexon IP-në publike të lidhjes dhe kërkon qytetin/rajonin e përafërt nga një shërbim IP-geolocation. Ky demonstrim nuk ruan IP-në në databazë. Lokacioni nuk është adresë e saktë dhe mund të jetë i pasaktë.
+  </div>
+
+  <section class="ip-card">
+    <div class="label">IP PUBLIKE E LIDHJES</div>
+    <div class="ip">{{ ip }}</div>
+  </section>
+
+  <section class="grid">
+    <div class="item"><div class="label">SHTETI</div><p>{{ location.get("country", "Nuk u gjet") }}</p></div>
+    <div class="item"><div class="label">QYTETI</div><p>{{ location.get("city", "Nuk u gjet") }}</p></div>
+    <div class="item"><div class="label">RAJONI</div><p>{{ location.get("region", "Nuk u gjet") }}</p></div>
+    <div class="item"><div class="label">OFRUESI I INTERNETIT</div><p>{{ location.get("isp", "Nuk u gjet") }}</p></div>
+  </section>
+
+  <footer>IP Inspector · Python + Flask · Educational use only</footer>
+</main>
+</body>
+</html>
